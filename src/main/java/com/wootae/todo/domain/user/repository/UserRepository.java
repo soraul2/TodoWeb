@@ -7,7 +7,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
 
-    //같은 아이디가 존재하는 가?
+    //[회원가입] 같은 아이디가 존재하는 가?
     boolean existsByUsername(String username);
 
+    //[로그인]
+    User findByUsername(String username);
 }

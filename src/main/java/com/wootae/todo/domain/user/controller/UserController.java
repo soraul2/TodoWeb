@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -41,9 +42,19 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String showLoginPage() {
+    public String showLoginPage(@RequestParam(value = "error", required = false) String error,
+                                @RequestParam(value = "exception", required = false) String exception,
+                                Model model){
+        // Filter에서 보낸 에러 메시지가 있다면 화면으로 전달
+        if (error != null) {
+            model.addAttribute("error", exception);
+        }
         return "user/login";
     }
 
+    @GetMapping("/myinfo")
+    public String showMyinfoPage(){
+        return "user/myinfo";
+    }
 
 }
